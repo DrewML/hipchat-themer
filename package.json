@@ -1,0 +1,24 @@
+{
+  "name": "hipchat-themer",
+  "version": "0.1.0",
+  "description": "An OSX application to theme the HipChat 4.x client",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron main.js",
+    "clean": "rm -rf dist && mkdir dist",
+    "compile": "./node_modules/.bin/babel -d dist src",
+    "styles": "cat styles/** > dist/app.css",
+    "freshstart": "npm run clean && npm run compile && npm run styles && npm start"
+  },
+  "author": "Andrew Levine",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.1.2",
+    "babel-core": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2",
+    "electron-prebuilt": "^0.34.0"
+  },
+  "dependencies": {
+    "app-module-path": "^1.0.4"
+  }
+}
