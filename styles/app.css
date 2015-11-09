@@ -1,5 +1,6 @@
 * {
     -webkit-user-select: none;
+    cursor: default;
 }
 
 body {
@@ -11,6 +12,12 @@ body {
 h1 {
     font-size: 5vw;
     color: #205081;
+    margin-bottom: 2%;
+}
+
+h2 {
+    color: #fff;
+    margin: 4% 0;
 }
 
 .logo {
@@ -31,4 +38,29 @@ h1 {
     color: #000;
     cursor: pointer;
     background-color: #80BEEA;
+}
+
+.apply-styles:active {
+    background-color: #288ADE;
+}
+
+.hipchat-app,
+.custom-stylesheet {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 4%;
+}
+
+.drop-target {
+    border: 1px dashed #3B6DAB;
+    height: 50vh;
+    position: relative;
+}
+
+.drop-target:before {
+    content: 'Drop File Here';
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    left: 0;
 }
