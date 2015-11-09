@@ -46,7 +46,10 @@ dragDrop.on('drop', e => {
 
 $('.apply-styles').addEventListener('click', e => {
     // TODO: Validate necessary files have been selected
-    
+
     let {app, css} = dropZones;
+
+    // TODO: Actually handle promise success/failure, and show
+    // spinner during injection process
     hipchat.injectCSS(app.filePath, css.filePath);
 });

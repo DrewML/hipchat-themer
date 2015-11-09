@@ -4,15 +4,31 @@ import jsdom from 'jsdom';
 import Promise from 'bluebird';
 
 const readFile = Promise.promisify(fs.readFile);
+const writeFile = Promise.promisify(fs.writeFile);
 const jsdomEnv = Promise.promisify(jsdom.env);
 
 const TARGET_FILE = '/Contents/Resources/chat.html';
 
 export function injectCSS(appPath, cssFilePath) {
+    let target = path.join(appPath, TARGET_FILE)
+
     return Promise.all([
-        readFile(path.join(appPath, TARGET_FILE), 'utf-8'),
+        readFile(target, 'utf-8'),
         readFile(cssFilePath, 'utf-8')
     ]).spread((html, css) => {
-        return jsdomEnv(html).tap(console.log.bind(console));
-    }).catch(console.error.bind(console));
+        return jsdomEnv(html).then(window => {
+            let {document} = window;
+            document.head.appendChild(createStyleTag(document, css));
+            return jsdom.serializeDocument(document);
+        }).then(newHTML => {
+            return writeFile(target, newHTML);
+        });
+    });
+}
+
+function createStyleTag(document, css) {
+    let styleTag = document.createElement('style');
+    styleTag.textContent = css;
+    styleTag.classList.add('custom-user-theme');
+    return styleTag;
 }
