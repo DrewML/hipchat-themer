@@ -13,6 +13,12 @@ export function $(selector) {
     return document.querySelector(selector);
 }
 
+export function disableZoom() {
+    window.addEventListener('mousewheel', function(e) {
+        if (e.ctrlKey) e.preventDefault();
+    });
+}
+
 export let addClass = toggleClasses.bind(null, true);
 export let removeClass = toggleClasses.bind(null, false);
 

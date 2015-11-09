@@ -1,5 +1,3 @@
-import {$} from 'utils';
-
 export default class DragAndDrop {
     constructor(dropZones = []) {
         this.dropZones = dropZones;
@@ -11,13 +9,11 @@ export default class DragAndDrop {
         }
         this._install();
     }
-
     on(eventType, cb) {
         let {listeners} = this;
         let availableTypes = Object.keys(listeners);
         if (~availableTypes.indexOf(eventType)) listeners[eventType].push(cb);
     }
-
     _install() {
         let {listeners, dropZones, _eventCallback} = this;
         dropZones.forEach(zone => {
@@ -27,7 +23,6 @@ export default class DragAndDrop {
             });
         });
     }
-
     _eventCallback(eventType, e) {
         e.preventDefault();
         e.stopPropagation();
