@@ -1,11 +1,13 @@
 import {$} from 'utils';
 
-export class DragAndDrop {
+export default class DragAndDrop {
     constructor(dropZones = []) {
         this.dropZones = dropZones;
         this.listeners = {
-            drag: [],
-            dragover: []
+            drop: [],
+            dragenter: [],
+            dragover: [],
+            dragleave: []
         }
         this._install();
     }
@@ -13,9 +15,8 @@ export class DragAndDrop {
     on(eventType, cb) {
         let {listeners} = this;
         let availableTypes = Object.keys(listeners);
-        if (!~availableTypes.indexOf(eventType)) return;
 
-        listeners[eventType].push(cb);
+        if (~availableTypes.indexOf(eventType)) listeners[eventType].push(cb);
     }
 
     _install() {
@@ -28,7 +29,12 @@ export class DragAndDrop {
         });
     }
 
-    _eventCallback(eventType) {
-        console.log(eventType);
+    _eventCallback(eventType, e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        this.listeners[eventType].forEach(listener => listener(e));
+
+        // if (eventType === 'drop') console.log(e.dataTransfer.files[0]);
     }
 }

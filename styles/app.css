@@ -57,6 +57,10 @@ h2 {
     position: relative;
 }
 
+.drop-target.drag {
+    border-color: #fff;
+}
+
 .drop-target:before {
     content: 'Drop File Here';
     position: absolute;
