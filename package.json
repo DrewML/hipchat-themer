@@ -6,7 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/electron main.js",
     "clean": "rm -rf dist && mkdir dist",
-    "compile": "./node_modules/.bin/babel -d dist src",
+    "compile": "./node_modules/.bin/babel -s inline -d dist src",
     "html": "./node_modules/.bin/html-minifier --o index-built.html --collapse-whitespace index.html",
     "styles": "cat styles/** > dist/app.css",
     "build": "npm run clean && npm run compile && npm run styles && npm run html",
