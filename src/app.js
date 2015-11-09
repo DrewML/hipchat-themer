@@ -1,17 +1,20 @@
 import DragAndDrop from 'dragdrop';
-import {isFileHipChatApp, addClass, removeClass, $} from 'utils';
+import {isHipChat, isStyleSheet, addClass, removeClass, $} from 'utils';
 
 const DRAG_CLASS = 'drag';
 const NO_FILE_CLASS = 'no-file';
+const FILE_SEL_CLASS = 'file-selected';
 
 let dropZones = {
     app: {
         el: $('.app.drop-target'),
-        filePath: ''
+        filePath: '',
+        validator: isHipChat
     },
     css: {
         el: $('.css.drop-target'),
-        filePath: ''
+        filePath: '',
+        validator: isStyleSheet
     }
 };
 
@@ -22,12 +25,16 @@ dragDrop.on('dragenter', e => addClass(e.target, DRAG_CLASS));
 dragDrop.on('dragleave', e => removeClass(e.target, DRAG_CLASS));
 
 dragDrop.on('drop', e => {
-    removeClass(e.target, [DRAG_CLASS, NO_FILE_CLASS]);
+    removeClass(e.target, DRAG_CLASS);
 
-    let file = e.dataTransfer.files[0];
+    let path = e.dataTransfer.files[0].path;
     let targetName = Object.keys(dropZones).filter(key => {
         return dropZones[key].el === e.target;
     })[0];
+    let isValid = dropZones[targetName].validator(path);
+    if (!isValid) return;
 
-    dropZones[targetName].filePath = file.path;
+    removeClass(e.target, NO_FILE_CLASS);
+    addClass(e.target, FILE_SEL_CLASS);
+    dropZones[targetName].filePath = path;
 });

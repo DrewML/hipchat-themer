@@ -1,7 +1,7 @@
 const HIPCHAT_APP_PATTERN = /\/HipChat([\w-]+)?.app$/i;
 const CSS_FILE_PATTERN = /.css$/i;
 
-export function isFileHipChatApp(filePath) {
+export function isHipChat(filePath) {
     return HIPCHAT_APP_PATTERN.test(filePath);
 }
 

@@ -26,8 +26,8 @@ app.on('ready', function() {
         height: 410,
         'min-width': 550,
         'min-height': 410,
-        // 'max-width': 550,
-        // 'max-height': 410
+        'max-width': 550,
+        'max-height': 410
     });
 
     // and load the index.html of the app.

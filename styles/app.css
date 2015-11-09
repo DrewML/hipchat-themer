@@ -52,19 +52,26 @@ h2 {
 }
 
 .drop-target {
-    border: 1px dashed #3B6DAB;
+    outline: 1px dashed #3B6DAB;
     height: 50vh;
     position: relative;
 }
 
 .drop-target.drag {
-    border-color: #fff;
+    outline-color: #fff;
 }
 
-.drop-target.no-file:before {
-    content: 'Drop File Here';
+.drop-target:before {
     position: absolute;
     top: 50%;
     width: 100%;
     left: 0;
+}
+
+.drop-target.no-file:before {
+    content: 'Drop File Here';
+}
+
+.drop-target.file-selected:before {
+    content: 'File Selected!';
 }
