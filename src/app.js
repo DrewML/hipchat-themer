@@ -1,3 +1,4 @@
+import * as modal from 'modal';
 import DragAndDrop from 'dragdrop';
 import {
     isHipChat,
@@ -52,12 +53,20 @@ dragDrop.on('drop', e => {
 
 $('.apply-styles').addEventListener('click', e => {
     // TODO: Validate necessary files have been selected
-
     let {app, css} = dropZones;
 
-    // TODO: Handle failure, and provide success notification
-    toggleSpinner(true);
+    toggleSpinner();
     hipchat.injectCSS(app.filePath, css.filePath).then(() => {
-        // success shit here
-    }).finally(() => toggleSpinner(false));
+        toggleSpinner();
+        return modal.open({
+            title: 'Success!',
+            message: 'Style applied successfully. Restart HipChat to see your changes.'
+        });
+    }).catch(err => {
+        toggleSpinner();
+        return modal.open({
+            title: 'Something went wrong...',
+            message: `We're not entirely sure what went wrong. Please report the issue on GitHub.`
+        });
+    });
 });

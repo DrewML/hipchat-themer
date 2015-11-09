@@ -1,0 +1,30 @@
+.modal {
+    position: absolute;
+    top: 5%;
+    left: 10.3%;
+    display: block;
+    height: 45%;
+    border-radius: 12px;
+    width: 74%;
+    background-color: #1D899A;
+    box-shadow: 6px 4px rgba(0,0,0,0.1);
+    z-index: 1;
+    color: #fff;
+    padding: 3%;
+    display: none;
+}
+
+.open-modal .modal {
+    display: block;
+}
+
+.modal-title {
+    font-weight: 700;
+    font-size: 1.8em;
+    margin-top: 5%;
+    margin-bottom: 4%;
+}
+
+.modal-content {
+    margin-bottom: 5%;
+}

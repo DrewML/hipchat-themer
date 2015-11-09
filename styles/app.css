@@ -31,54 +31,11 @@ h2 {
     top: 3px;
 }
 
-.apply-styles {
-    display: inline-block;
-    background-color: #288ADE;
-    padding: 2vw 16vw;
-    color: #fff;
-    border-radius: 4px;
-}
-
-.apply-styles:hover {
-    color: #000;
-    cursor: pointer;
-    background-color: #80BEEA;
-}
-
-.apply-styles:active {
-    background-color: #288ADE;
-}
-
 .hipchat-app,
 .custom-stylesheet {
     display: inline-block;
     width: 50%;
     margin-bottom: 4%;
-}
-
-.drop-target {
-    outline: 1px dashed #3B6DAB;
-    height: 50vh;
-    position: relative;
-}
-
-.drop-target.drag {
-    outline-color: #fff;
-}
-
-.drop-target:before {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    left: 0;
-}
-
-.drop-target.no-file:before {
-    content: 'Drop File Here';
-}
-
-.drop-target.file-selected:before {
-    content: 'File Selected!';
 }
 
 .overlay:before {
@@ -88,5 +45,6 @@ h2 {
     height: 100%;
     top: 0;
     position: absolute;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
