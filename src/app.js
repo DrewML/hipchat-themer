@@ -1,6 +1,12 @@
 import DragAndDrop from 'dragdrop';
 import {
-    isHipChat, isStyleSheet, addClass, removeClass, disableZoom, $
+    isHipChat,
+    isStyleSheet,
+    addClass,
+    removeClass,
+    disableZoom,
+    toggleSpinner,
+    $
 } from 'utils';
 import * as hipchat from 'hipchat';
 
@@ -49,7 +55,9 @@ $('.apply-styles').addEventListener('click', e => {
 
     let {app, css} = dropZones;
 
-    // TODO: Actually handle promise success/failure, and show
-    // spinner during injection process
-    hipchat.injectCSS(app.filePath, css.filePath);
+    // TODO: Handle failure, and provide success notification
+    toggleSpinner(true);
+    hipchat.injectCSS(app.filePath, css.filePath).then(() => {
+        // success shit here
+    }).finally(() => toggleSpinner(false));
 });

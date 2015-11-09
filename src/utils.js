@@ -19,6 +19,10 @@ export function disableZoom() {
     });
 }
 
+export function toggleSpinner(show) {
+    document.body.classList[show ? 'add' : 'remove']('overlay');
+}
+
 export let addClass = toggleClasses.bind(null, true);
 export let removeClass = toggleClasses.bind(null, false);
 

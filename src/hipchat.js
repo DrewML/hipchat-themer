@@ -17,18 +17,17 @@ export function injectCSS(appPath, cssFilePath) {
         readFile(cssFilePath, 'utf-8')
     ]).spread((html, css) => {
         return jsdomEnv(html).then(window => {
-            let {document} = window;
-            document.head.appendChild(createStyleTag(document, css));
-            return jsdom.serializeDocument(document);
-        }).then(newHTML => {
-            return writeFile(target, newHTML);
+            injectStyle(window.document, css);
+            // Note: serializeDocument is both slow (on a doc this size)
+            // and synchronous
+            return jsdom.serializeDocument(window.document);
         });
-    });
+    }).then(newHTML => writeFile(target, newHTML));
 }
 
-function createStyleTag(document, css) {
+function injectStyle(document, css) {
     let styleTag = document.createElement('style');
     styleTag.textContent = css;
     styleTag.classList.add('custom-user-theme');
-    return styleTag;
+    document.head.appendChild(styleTag);
 }
