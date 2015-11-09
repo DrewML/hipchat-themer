@@ -15,7 +15,6 @@ export default class DragAndDrop {
     on(eventType, cb) {
         let {listeners} = this;
         let availableTypes = Object.keys(listeners);
-
         if (~availableTypes.indexOf(eventType)) listeners[eventType].push(cb);
     }
 
@@ -32,9 +31,6 @@ export default class DragAndDrop {
     _eventCallback(eventType, e) {
         e.preventDefault();
         e.stopPropagation();
-
         this.listeners[eventType].forEach(listener => listener(e));
-
-        // if (eventType === 'drop') console.log(e.dataTransfer.files[0]);
     }
 }

@@ -13,6 +13,13 @@ export function $(selector) {
     return document.querySelector(selector);
 }
 
-export function $$(selector) {
-    return document.querySelectorAll(selector);
+export let addClass = toggleClasses.bind(null, true);
+export let removeClass = toggleClasses.bind(null, false);
+
+function toggleClasses(show, el, classes) {
+    if (!Array.isArray(classes)) classes = [classes];
+    
+    classes.forEach(className => {
+        el.classList[show ? 'add' : 'remove'](className);
+    });
 }

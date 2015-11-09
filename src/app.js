@@ -1,26 +1,33 @@
 import DragAndDrop from 'dragdrop';
-import {isFileHipChatApp, $, $$} from 'utils';
+import {isFileHipChatApp, addClass, removeClass, $} from 'utils';
+
+const DRAG_CLASS = 'drag';
+const NO_FILE_CLASS = 'no-file';
 
 let dropZones = {
-    app: $('.app.drop-target'),
-    css: $('.css.drop-target')
+    app: {
+        el: $('.app.drop-target'),
+        filePath: ''
+    },
+    css: {
+        el: $('.css.drop-target'),
+        filePath: ''
+    }
 };
 
-let zones = Object.keys(dropZones).map(key => dropZones[key]);
+let zones = Object.keys(dropZones).map(key => dropZones[key].el);
 let dragDrop = new DragAndDrop(zones);
 
+dragDrop.on('dragenter', e => addClass(e.target, DRAG_CLASS));
+dragDrop.on('dragleave', e => removeClass(e.target, DRAG_CLASS));
+
 dragDrop.on('drop', e => {
+    removeClass(e.target, [DRAG_CLASS, NO_FILE_CLASS]);
+
     let file = e.dataTransfer.files[0];
     let targetName = Object.keys(dropZones).filter(key => {
-        return dropZones[key] === e.target;
+        return dropZones[key].el === e.target;
     })[0];
-    console.log(file, targetName);
-});
 
-dragDrop.on('dragenter', e => {
-    e.target.classList.add('drag');
-});
-
-dragDrop.on('dragleave', e => {
-    e.target.classList.remove('drag');
+    dropZones[targetName].filePath = file.path;
 });
