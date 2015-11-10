@@ -1,5 +1,6 @@
 import DragAndDrop from 'dragdrop';
 import applyBtnHandler from 'apply-btn-handler';
+import clearThemeBtnHandler from 'clear-theme-btn-handler';
 import {
     isHipChat,
     isStyleSheet,
@@ -50,3 +51,4 @@ dragDrop.on('drop', e => {
 });
 
 $('.apply-styles').addEventListener('click', () => applyBtnHandler(dropZones));
+$('.clear-styles').addEventListener('click', () => clearThemeBtnHandler(dropZones));
