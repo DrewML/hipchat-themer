@@ -1,7 +1,7 @@
 .btn {
     display: inline-block;
     background-color: #288ADE;
-    padding: 2vw 16vw;
+    padding: 2vw 9vw;
     color: #fff;
     border-radius: 4px;
 }
@@ -14,4 +14,8 @@
 
 .btn:active {
     background-color: #288ADE;
+}
+
+.btn.apply-styles {
+    margin-right: 12%;
 }
